@@ -20,7 +20,7 @@ class Setting :
     from tkinter import filedialog
     import pygame as pg
     import numpy as np
-    main_path = __file__.removesuffix("\\viewer.py").replace("\\", "/")
+    main_path = __file__.removesuffix("/viewer.py")
 
 class File :
     
@@ -107,7 +107,7 @@ class File :
         Setting.pg.init()
         screen = Setting.pg.display.set_mode(size)
         Setting.pg.display.set_caption(f"MAP by JARJARBIN'S STUDIO | VIEWER | {self.path}")
-        icon = Setting.pg.image.load("files\\images\\logo_little_simple.png")
+        icon = Setting.pg.image.load("files/images/logo_little_simple.png")
         Setting.pg.display.set_icon(icon)
         size_x, size_y = size
         gap_increment = size_x / len(self.compiled_arr)

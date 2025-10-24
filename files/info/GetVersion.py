@@ -8,7 +8,7 @@
 #############################
 
 try :
-    with open("files\\info\\version.txt", 'r') as file :
+    with open("files/info/version.txt", 'r') as file :
         version = file.read()
     file.close()
 except FileNotFoundError :

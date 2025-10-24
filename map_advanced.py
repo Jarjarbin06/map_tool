@@ -15,7 +15,7 @@ class Info :
     
     import pygame.version as py_version
     
-    main_path = __file__.removesuffix("\map_advanced.py")
+    main_path = __file__.removesuffix("/map_advanced.py")
 
 class Console :
     
@@ -188,7 +188,7 @@ class GUI :
         pg.draw.line(SCREEN, (50, 50, 50), (0, size_y - 40), (size_x, size_y - 40), 5)
         credit = GUI.credit_font.render("MAP by JARJARBIN", True, (50, 50, 50))
         info = GUI.info_font.render(f"v{Info.version}", True, (50, 50, 50))
-        logo = pg.image.load("files\\images\\logo_little_advanced.png")
+        logo = pg.image.load("files/images/logo_little_advanced.png")
         creditRect = credit.get_rect()
         creditRect.x = 40
         creditRect.y = size_y - creditRect.height - 10
@@ -209,7 +209,7 @@ class GUI :
         
         Console.log(Console.color("======================================================================================================", Console.C.INFO))
         
-        Console.cmd('%CMDOW% "MAP - Launcher (advanced)" /hid')
+        #Console.cmd('%CMDOW% "MAP - Launcher (advanced)" /hid')
         
         GUI.reload_font()
         next_screen = "exit"
@@ -222,7 +222,7 @@ class GUI :
                 from pygame import quit
                 quit()
                 
-                Console.cmd('%CMDOW% "MAP - Launcher (advanced)" /vis')
+                #Console.cmd('%CMDOW% "MAP - Launcher (advanced)" /vis')
                 
                 Console.log(Console.color("Program stopped", Console.C.ERROR), start = "\n\n", sleep = 2)
                 
@@ -230,8 +230,8 @@ class GUI :
 
 GUI.start()
 
-Console.cmd('%CMDOW% "MAP - Launcher (advanced)" /vis')
-from keyboard import is_pressed
+"""
+#Console.cmd('%CMDOW% "MAP - Launcher (advanced)" /vis')
 
 Console.open_animation(Console.A.FULL)
 Console.log(Console.animate() + " <=> " + Console.color("Program closing in 3 (press escape for a second to cancel)", Console.C.ERROR))
@@ -239,7 +239,6 @@ Console.open_animation(Console.A.EMPTY_L)
 
 n = 3
 escape = False
-
 while n != 0 and not(escape) :
     for _ in range(4) :
         Console.log(Console.color(f"Program closing in {n} (press escape for a second to cancel)", Console.C.ERROR) + " <=> " + Console.animate(), delete = True, sleep = 0.2)
@@ -258,3 +257,4 @@ else :
         pass
     while not(is_pressed('escape')) :
         pass
+"""

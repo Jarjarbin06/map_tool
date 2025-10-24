@@ -15,8 +15,8 @@ class Info :
     
     import pygame.version as py_version
     
-    main_path = __file__.removesuffix("\map_simple.py")
-    log_path = f"{main_path}\\files\\info\\logs"
+    main_path = __file__.removesuffix("/map_simple.py")
+    log_path = f"{main_path}/files/info/logs"
 
 class Console :
     
@@ -66,7 +66,7 @@ class Console :
     
     def clear() -> None :
         from os import system
-        system("cls")
+        system("clear")
     
     def delete_last_line() -> None :
         import sys
@@ -205,7 +205,7 @@ class GUI :
         pg.draw.line(SCREEN, (50, 50, 50), (0, size_y - 40), (size_x, size_y - 40), 5)
         credit = GUI.credit_font.render("MAP by JARJARBIN", True, (50, 50, 50))
         info = GUI.info_font.render(f"v{Info.version}", True, (50, 50, 50))
-        logo = pg.image.load("files\\images\\logo_little_simple.png")
+        logo = pg.image.load("files/images/logo_little_simple.png")
         creditRect = credit.get_rect()
         creditRect.x = 40
         creditRect.y = size_y - creditRect.height - 10
@@ -225,13 +225,13 @@ class GUI :
         Console.log(Console.color("======================================================================================================", Console.C.INFO))
         Console.LOG.log(Console.status_list[1], Console.title_list[1], "GUI started", Info.log_path)
         
-        Console.cmd('%CMDOW% "MAP - Launcher" /hid')
+        #Console.cmd('%CMDOW% "MAP - Launcher" /hid')
         
         GUI.reload_font()
         next_screen = "welcome screen"
         while True :
             
-            Console.log(Console.color("switching screen", Console.C.INFO, "SCREEN"), start = "\n", end = " | ")
+            Console.log(Console.color("switching screen", Console.C.INFO, "SCREEN"), start = "", end = "\n")
             
             GUI.reload_font()
             if next_screen == "welcome screen" :
@@ -248,7 +248,7 @@ class GUI :
                 from pygame import quit
                 quit()
                 
-                Console.cmd('%CMDOW% "MAP - Launcher" /vis')
+                #Console.cmd('%CMDOW% "MAP - Launcher" /vis')
                 
                 Console.log(Console.color("Program stopped", Console.C.ERROR), start = "\n\n", sleep = 2)
                 Console.LOG.log(Console.status_list[1], Console.title_list[1], "GUI stopped", Info.log_path)
@@ -275,7 +275,7 @@ class GUI :
         WELCOME = pg.display.set_mode(size)
         pg.display.set_caption("MAP | WELCOME")
         pg.display.set_allow_screensaver(False)
-        icon = pg.image.load("files\\images\\logo_little_simple.png")
+        icon = pg.image.load("files/images/logo_little_simple.png")
         pg.display.set_icon(icon)
         size_x, size_y = size
         WELCOME.fill((255, 255, 255))
@@ -294,7 +294,7 @@ class GUI :
         text1 = GUI.font32.render("Welcome to MAP", True, (50, 50, 50))
         text2 = GUI.font25.render("A NOISE MAP TOOL", True, (50, 50, 50))
         text3 = GUI.font16.render("press any key to continue", True, (50, 50, 50))
-        image = pg.image.load("files\\images\\logo_big_simple.png")
+        image = pg.image.load("files/images/logo_big_simple.png")
         
         Console.animation_step = 8
         Console.log(Console.animate() + " <=> " + Console.color("Window - elements placement", Console.C.WARNING, "SCREEN - welcome"), delete = True)
@@ -320,7 +320,7 @@ class GUI :
         Console.log(Console.animate() + " <=> " + Console.color("Window - ready", Console.C.VALID, "SCREEN - welcome"), delete = True)
         Console.LOG.log(Console.status_list[1], Console.title_list[1], "welcome window opened", Info.log_path)
         
-        Console.cmd('%CMDOW% "MAP | WELCOME" /ena /res')
+        #Console.cmd('%CMDOW% "MAP | WELCOME" /ena /res')
         
         while not do_exit :
             for event in pg.event.get():
@@ -353,7 +353,7 @@ class GUI :
         CREDIT = pg.display.set_mode(size)
         pg.display.set_caption("MAP | CREDIT")
         pg.display.set_allow_screensaver(False)
-        icon = pg.image.load("files\\images\\logo_little_simple.png")
+        icon = pg.image.load("files/images/logo_little_simple.png")
         pg.display.set_icon(icon)
         size_x, size_y = size
         CREDIT.fill((255, 255, 255))
@@ -373,7 +373,7 @@ class GUI :
         credit3 = GUI.font25.render("GUI by JARJARBIN", True, (50, 50, 50))
         credit4 = GUI.font32.render("EVERYTHING BY JARJARBIN", True, (200, 50, 50))
         info = GUI.info_font.render(f"v{Info.version}", True, (50, 50, 50))
-        logo = pg.image.load("files\\images\\logo_little_simple.png")
+        logo = pg.image.load("files/images/logo_little_simple.png")
         
         Console.animation_step = 8
         Console.log(Console.animate() + " <=> " + Console.color("Window - elements placement", Console.C.WARNING, "SCREEN - welcome"), delete = True)
@@ -419,7 +419,7 @@ class GUI :
         Console.log(Console.animate() + " <=> " + Console.color("Window - ready", Console.C.VALID, "SCREEN - credit"), delete = True)
         Console.LOG.log(Console.status_list[1], Console.title_list[1], "credit window opened", Info.log_path)
         
-        Console.cmd('%CMDOW% "MAP | CREDIT" /ena /res')
+        #Console.cmd('%CMDOW% "MAP | CREDIT" /ena /res')
         
         while not do_exit :
             for event in pg.event.get():
@@ -456,7 +456,7 @@ class GUI :
             "welcome screen" : {"selected?" : False, "color" : (100, 100, 100), "bg1" : (80, 80, 80), "bg2" : (0, 0, 0)},
             "credit" : {"selected?" : False, "color" : (100, 100, 100), "bg1" : (80, 80, 80), "bg2" : (0, 0, 0)},
             "exit" : {"selected?" : False, "color" : (200, 150, 150), "bg1" : (200, 110, 110), "bg2" : (100, 50, 50)}
-                  }
+            }
         do_exit = False
         is_up_pressed = False
         is_down_pressed = False
@@ -469,7 +469,7 @@ class GUI :
         HOME.fill((255, 255, 255))
         pg.display.set_caption("MAP | HOME")
         pg.display.set_allow_screensaver(False)
-        icon = pg.image.load("files\\images\\logo_little_simple.png")
+        icon = pg.image.load("files/images/logo_little_simple.png")
         pg.display.set_icon(icon)
         
         Console.log(Console.animate() + " <=> " + Console.color("Window - elements creation", Console.C.WARNING, "SCREEN - home"), delete = True)
@@ -490,7 +490,7 @@ class GUI :
         Console.log(Console.animate() + " <=> " + Console.color("Window - ready", Console.C.VALID, "SCREEN - home"), delete = True)
         Console.LOG.log(Console.status_list[1], Console.title_list[1], "home window opened", Info.log_path)
         
-        Console.cmd('%CMDOW% "MAP | HOME" /ena /res')
+        #Console.cmd('%CMDOW% "MAP | HOME" /ena /res')
         
         while not do_exit :
             if selected_button < 0 :
@@ -602,7 +602,7 @@ class GUI :
         GENERATOR = pg.display.set_mode(size)
         pg.display.set_caption("MAP | GENERATOR")
         pg.display.set_allow_screensaver(False)
-        icon = pg.image.load("files\\images\\logo_little_simple.png")
+        icon = pg.image.load("files/images/logo_little_simple.png")
         pg.display.set_icon(icon)
         GENERATOR.fill((255, 255, 255))
         pg.display.flip()
@@ -617,7 +617,7 @@ class GUI :
         Console.log(Console.animate() + " <=> " + Console.color("Window - ready", Console.C.VALID, "SCREEN - generator"), delete = True)
         Console.LOG.log(Console.status_list[1], Console.title_list[1], "generator window opened", Info.log_path)
         
-        Console.cmd('%CMDOW% "MAP | GENERATOR" /ena /res')
+        #Console.cmd('%CMDOW% "MAP | GENERATOR" /ena /res')
         
         while not do_exit :
             if selected_setting < 0 :
@@ -713,7 +713,7 @@ class GUI :
                     GENERATOR = pg.display.set_mode(size)
                     pg.display.set_caption("MAP | GENERATOR")
                     pg.display.set_allow_screensaver(False)
-                    icon = pg.image.load("files\\images\\logo_little_simple.png")
+                    icon = pg.image.load("files/images/logo_little_simple.png")
                     pg.display.set_icon(icon)
                     GENERATOR.fill((255, 255, 255))
                     pg.display.flip()
@@ -789,7 +789,7 @@ class GUI :
     
     def select_val(current_limit : int | float, step : int | float, low : int | float, high : int | float, name : str) -> float :
         
-        Console.log(Console.color(f"{name} selector opened", Console.C.INFO, "SCREEN - select_val"))
+        Console.log(Console.color(f"{name} selector opened", Console.C.INFO, "SCREEN - select_val"), start = "", end = "\n")
         Console.LOG.log(Console.status_list[1], Console.title_list[1], f"{name} selector window opened", Info.log_path)
         
         import pygame as pg
@@ -807,17 +807,17 @@ class GUI :
         LIMIT = pg.display.set_mode(size)
         pg.display.set_caption(f"MAP | GENERATOR | {name} SELECTOR")
         pg.display.set_allow_screensaver(False)
-        icon = pg.image.load("files\\images\\logo_little_simple.png")
+        icon = pg.image.load("files/images/logo_little_simple.png")
         pg.display.set_icon(icon)
         LIMIT.fill((255, 255, 255))
         pg.display.flip()
         
         Console.animation_step = 8
-        Console.log(Console.animate() + " <=> " + Console.color("Window - elements placement", Console.C.WARNING, "SCREEN - generator"), delete = True)
+        Console.log(Console.animate() + " <=> " + Console.color("Window - elements placement", Console.C.WARNING, "SCREEN - generator"))
         
         GUI.add_credit(LIMIT)
         
-        Console.cmd(f'%CMDOW% "MAP | GENERATOR | {name} SELECTOR" /ena /res')
+        #Console.cmd(f'%CMDOW% "MAP | GENERATOR | {name} SELECTOR" /ena /res')
         
         while not do_exit :
             if update :
@@ -874,7 +874,8 @@ class GUI :
 
 GUI.start()
 
-Console.cmd('%CMDOW% "MAP - Launcher" /vis')
+"""
+#Console.cmd('%CMDOW% "MAP - Launcher" /vis')
 
 from keyboard import is_pressed
 
@@ -905,3 +906,4 @@ else :
         pass
     while not(is_pressed('escape')) :
         pass
+"""
