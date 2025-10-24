@@ -227,7 +227,7 @@ class GUI :
         Console.log(Console.color("======================================================================================================", Console.C.INFO))
         Console.LOG.log(Console.status_list[1], Console.title_list[1], "GUI started", Info.log_path)
 
-        Console.cmd('wmctrl -r "MAP - Launcher" -b add,hidden,below')
+        Console.cmd('wmctrl -r "./MapLauncher.sh" -b add,below')
 
         GUI.reload_font()
         next_screen = "welcome screen"
@@ -249,8 +249,6 @@ class GUI :
             if next_screen == "exit" :
                 from pygame import quit
                 quit()
-
-                Console.cmd('wmctrl -r "MAP - Launcher" -b add,below')
 
                 Console.log(Console.color("Program stopped", Console.C.ERROR), start = "\n\n", sleep = 2)
                 Console.LOG.log(Console.status_list[1], Console.title_list[1], "GUI stopped", Info.log_path)
