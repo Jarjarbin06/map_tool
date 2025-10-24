@@ -6,6 +6,8 @@
 ###=======================###
 ### by JARJARBIN's STUDIO ###
 #############################
+from Xlib.X import Success
+
 
 class Info :
     
@@ -220,13 +222,13 @@ class GUI :
     
     Console.log(Console.animate() + " <=> " + Console.color("Init - start fonction", Console.C.WARNING, "CLASS - GUI"), delete = True)
     
-    def start() -> None :
+    def start() -> int :
         
         Console.log(Console.color("======================================================================================================", Console.C.INFO))
         Console.LOG.log(Console.status_list[1], Console.title_list[1], "GUI started", Info.log_path)
-        
-        #Console.cmd('%CMDOW% "MAP - Launcher" /hid')
-        
+
+        Console.cmd('wmctrl -r "MAP - Launcher" -b add,hidden,below')
+
         GUI.reload_font()
         next_screen = "welcome screen"
         while True :
@@ -247,13 +249,13 @@ class GUI :
             if next_screen == "exit" :
                 from pygame import quit
                 quit()
-                
-                #Console.cmd('%CMDOW% "MAP - Launcher" /vis')
-                
+
+                Console.cmd('wmctrl -r "MAP - Launcher" -b add,below')
+
                 Console.log(Console.color("Program stopped", Console.C.ERROR), start = "\n\n", sleep = 2)
                 Console.LOG.log(Console.status_list[1], Console.title_list[1], "GUI stopped", Info.log_path)
                 
-                return
+                return Success
     
     Console.log(Console.animate() + " <=> " + Console.color("Init - welcome fonction", Console.C.WARNING, "CLASS - GUI"), delete = True)
     
@@ -319,9 +321,9 @@ class GUI :
         Console.animation_step = Console.animation_max_step
         Console.log(Console.animate() + " <=> " + Console.color("Window - ready", Console.C.VALID, "SCREEN - welcome"), delete = True)
         Console.LOG.log(Console.status_list[1], Console.title_list[1], "welcome window opened", Info.log_path)
-        
-        #Console.cmd('%CMDOW% "MAP | WELCOME" /ena /res')
-        
+
+        Console.cmd('wmctrl -a "MAP | WELCOME"')
+
         while not do_exit :
             for event in pg.event.get():
                 if event.type == pg.QUIT:
@@ -418,9 +420,9 @@ class GUI :
         Console.animation_step = Console.animation_max_step
         Console.log(Console.animate() + " <=> " + Console.color("Window - ready", Console.C.VALID, "SCREEN - credit"), delete = True)
         Console.LOG.log(Console.status_list[1], Console.title_list[1], "credit window opened", Info.log_path)
-        
-        #Console.cmd('%CMDOW% "MAP | CREDIT" /ena /res')
-        
+
+        Console.cmd('wmctrl -a "MAP | CREDIT"')
+
         while not do_exit :
             for event in pg.event.get():
                 if event.type == pg.QUIT:
@@ -489,9 +491,9 @@ class GUI :
         Console.animation_step = Console.animation_max_step
         Console.log(Console.animate() + " <=> " + Console.color("Window - ready", Console.C.VALID, "SCREEN - home"), delete = True)
         Console.LOG.log(Console.status_list[1], Console.title_list[1], "home window opened", Info.log_path)
-        
-        #Console.cmd('%CMDOW% "MAP | HOME" /ena /res')
-        
+
+        Console.cmd('wmctrl -a "MAP | HOME"')
+
         while not do_exit :
             if selected_button < 0 :
                 selected_button = len(buttons) - 1
@@ -617,7 +619,7 @@ class GUI :
         Console.log(Console.animate() + " <=> " + Console.color("Window - ready", Console.C.VALID, "SCREEN - generator"), delete = True)
         Console.LOG.log(Console.status_list[1], Console.title_list[1], "generator window opened", Info.log_path)
         
-        #Console.cmd('%CMDOW% "MAP | GENERATOR" /ena /res')
+        Console.cmd('wmctrl -a "MAP | GENERATOR"')
         
         while not do_exit :
             if selected_setting < 0 :
@@ -817,7 +819,7 @@ class GUI :
         
         GUI.add_credit(LIMIT)
         
-        #Console.cmd(f'%CMDOW% "MAP | GENERATOR | {name} SELECTOR" /ena /res')
+        Console.cmd(f'wmctrl -a "MAP | GENERATOR | {name} SELECTOR"')
         
         while not do_exit :
             if update :
@@ -873,37 +875,3 @@ class GUI :
     Console.LOG.log(Console.status_list[1], Console.title_list[2], "GUI initialized", Info.log_path)
 
 GUI.start()
-
-"""
-#Console.cmd('%CMDOW% "MAP - Launcher" /vis')
-
-from keyboard import is_pressed
-
-Console.open_animation(Console.A.FULL)
-Console.log(Console.animate() + " <=> " + Console.color("Program closing in 3 (press escape for a second to cancel)", Console.C.ERROR))
-Console.open_animation(Console.A.EMPTY_L)
-
-n = 3
-escape = False
-
-while n != 0 and not(escape) :
-    for _ in range(4) :
-        Console.log(Console.color(f"Program closing in {n} (press escape for a second to cancel)", Console.C.ERROR) + " <=> " + Console.animate(), delete = True, sleep = 0.2)
-        if is_pressed('escape') :
-            escape = True
-            break
-    n -= 1
-
-if not(escape) :
-    for _ in range(2) :
-        Console.log(Console.color("Program closing in 0", Console.C.ERROR) + " <=> " + Console.animate(), delete = True, sleep = 0.2)
-    Console.log(Console.color("Program closing", Console.C.ERROR) + " <=> " + Console.animate(), delete = True)
-    Console.LOG.log(Console.status_list[2], Console.title_list[4], "Program closed", Info.log_path)
-else :
-    Console.log(Console.color("Program closing cancel (press escape again to close program)", Console.C.ERROR), delete = True)
-    Console.LOG.log(Console.status_list[1], Console.title_list[5], "Program closing cancelled", Info.log_path)
-    while is_pressed('escape') :
-        pass
-    while not(is_pressed('escape')) :
-        pass
-"""
