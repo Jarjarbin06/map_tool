@@ -20,7 +20,7 @@ def init(path : str) :
         datetime_module_active = True
     if datetime_module_active :
         session_start_time = str(datetime.datetime.now())
-        with open("{}\\{}.txt".format(path, session_start_time.replace(":", "_")), 'a') as log_file :
+        with open("{}/{}.txt".format(path, session_start_time.replace(":", "_")), 'a') as log_file :
             log_file.write("   date          time      | [type.] category | information : detail\n")
         log_file.close()
     else :
