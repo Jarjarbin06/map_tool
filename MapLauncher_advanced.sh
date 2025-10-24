@@ -1,3 +1,4 @@
+#!/bin/bash
 @echo off
 mode con:cols=40 lines=10
 set path=%cd:map_tool=Python system 3.12.2\python.exe%
