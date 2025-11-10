@@ -1,0 +1,34 @@
+   date          time      | [type.] category | detail
+
+---START---
+2025-11-07 18:00:00.067573 | [info.]  module  | logger_program started
+2025-11-07 18:00:00.636920 | [info.]  class   | GENERATOR initialized
+2025-11-07 18:00:00.638148 | [info.]  class   | VIEWER initialized
+2025-11-07 18:00:00.639162 | [info.]  class   | GUI initialized
+2025-11-07 18:00:00.639373 | [info.]    gui   | GUI started
+2025-11-07 18:00:01.213651 | [info.]    gui   | welcome window opened
+2025-11-07 18:00:02.272275 | [info.]    gui   | welcome window closed
+2025-11-07 18:00:02.448087 | [info.]    gui   | home window opened
+2025-11-07 18:00:05.438934 | [info.]    gui   | home window closed
+2025-11-07 18:00:05.637609 | [info.]    gui   | generator window opened
+2025-11-07 18:00:06.760603 | [info.]    gui   | SIZE selector window opened
+2025-11-07 18:00:10.858856 | [info.]    gui   | SIZE selector window closed
+2025-11-07 18:00:20.106742 | [info.]   file   | New map saved :
+>>> --------------------
+>>> example in /home/jarjarbin/python/map_tool/files/generated_maps
+>>>
+>>> additional info :
+>>>     - boolean = False
+>>>     - binary = False
+>>>     - string = False
+>>>     - size = (300, 300)
+>>> --------------------
+2025-11-07 18:00:20.411545 | [info.]    gui   | generator window closed
+2025-11-07 18:00:20.670991 | [info.]    gui   | home window opened
+2025-11-07 18:00:23.233114 | [info.]    gui   | home window closed
+2025-11-07 18:00:23.234771 | [info.]    gui   | viewer window opened
+2025-11-07 18:00:28.721021 | [info.]    gui   | viewer window closed
+2025-11-07 18:00:28.906003 | [info.]    gui   | home window opened
+2025-11-07 18:00:30.595863 | [info.]    gui   | home window closed
+2025-11-07 18:00:32.596912 | [info.]    gui   | GUI stopped
+----END----

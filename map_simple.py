@@ -6,30 +6,32 @@
 ###=======================###
 ### by JARJARBIN's STUDIO ###
 #############################
-from Xlib.X import Success
 
+import traceback as tb
 
 class Info :
     
     from files.info import GetVersion
     version = GetVersion.version
     del GetVersion
-    
+
     import pygame.version as py_version
     
     main_path = __file__.removesuffix("/map_simple.py")
     log_path = f"{main_path}/files/info/logs"
+    exit_success = 0
+    exit_error = 84
 
 class Console :
     
     from files.info.console_info import C, A
-    from files.info.logs import logger_program as LOG
+    from files.info.logs import logger as LOG
     
     status_list = ["test.", "info.", "warn.", "error", "crit.", "user."]
-    title_list = ["  test  ", "function", " class  ", " module ", "  file  ", "  user  ", "unknown "]
+    title_list = ["  test  ", "function", " class  ", " module ", "  file  ", "  user  ", "unknown ", "   gui  "]
     
-    LOG.init(Info.log_path)
-    LOG.log(status_list[1], title_list[3], "logger_program started", Info.log_path)
+    LOG.create(Info.log_path)
+    LOG.log(status_list[1], title_list[3], "logger_program started")
     
     animation = []
     animation_step = 0
@@ -95,35 +97,30 @@ class Generator :
         from files.generator import NoiseMap
         Generator.opened_file = NoiseMap(low, high, size)
         Generator.is_file_open = True
-        return
     
     Console.log(Console.animate() + " <=> " + Console.color("Init - float2bool fonction", Console.C.WARNING, "CLASS - GENERATOR"), delete = True)
     
     def float2bool(limit : int | float = 0.5) -> None :
         if Generator.is_file_open :
             Generator.opened_file.boolean(limit)
-        return
     
     Console.log(Console.animate() + " <=> " + Console.color("Init - float2bin fonction", Console.C.WARNING, "CLASS - GENERATOR"), delete = True)
     
     def float2bin(limit : int | float = 0.5) -> None :
         if Generator.is_file_open :
             Generator.opened_file.binary(limit)
-        return
     
     Console.log(Console.animate() + " <=> " + Console.color("Init - float2string fonction", Console.C.WARNING, "CLASS - GENERATOR"), delete = True)
     
     def float2string(limit : int | float = 0.5, str1 : str = "-", str2 : str = "#") -> None :
         if Generator.is_file_open :
             Generator.opened_file.string(limit, str1, str2)
-        return
     
     Console.log(Console.animate() + " <=> " + Console.color("Init - smooth fonction", Console.C.WARNING, "CLASS - GENERATOR"), delete = True)
     
     def smooth(full_around : bool = False) -> None :
         if Generator.is_file_open :
             Generator.opened_file.smooth(full_around)
-        return
     
     Console.log(Console.animate() + " <=> " + Console.color("Init - save fonction", Console.C.WARNING, "CLASS - GENERATOR"), delete = True)
     
@@ -131,11 +128,10 @@ class Generator :
         if Generator.is_file_open :
             Generator.opened_file.compile()
             Generator.opened_file.save()
-        return
     
     Console.animation_step = Console.animation_max_step
     Console.log(Console.animate() + " <=> " + Console.color("Init - Finish", Console.C.VALID, "CLASS - GENERATOR"), delete = True)
-    Console.LOG.log(Console.status_list[1], Console.title_list[2], "GENERATOR initialized", Info.log_path)
+    Console.LOG.log(Console.status_list[1], Console.title_list[2], "GENERATOR initialized")
 
 class Viewer :
     
@@ -159,7 +155,6 @@ class Viewer :
             Viewer.is_file_open = True
         else :
             Console.log(Console.color("file failed to open", Console.C.ERROR, "ERROR"))
-        return
     
     Console.animation_step = 9
     Console.log(Console.animate() + " <=> " + Console.color("Init - show fonction", Console.C.WARNING, "CLASS - VIEWER"), delete = True)
@@ -169,11 +164,10 @@ class Viewer :
             Viewer.opened_file.show(size)
         else :
             Console.log(Console.color("you can't view a file when none is opened", Console.C.WARNING, "Warning"))
-        return
     
     Console.animation_step = Console.animation_max_step
     Console.log(Console.animate() + " <=> " + Console.color("Init - Finish", Console.C.VALID, "CLASS - VIEWER"), delete = True)
-    Console.LOG.log(Console.status_list[1], Console.title_list[2], "VIEWER initialized", Info.log_path)
+    Console.LOG.log(Console.status_list[1], Console.title_list[2], "VIEWER initialized")
 
 class GUI :
     
@@ -225,7 +219,7 @@ class GUI :
     def start() -> int :
         
         Console.log(Console.color("======================================================================================================", Console.C.INFO))
-        Console.LOG.log(Console.status_list[1], Console.title_list[1], "GUI started", Info.log_path)
+        Console.LOG.log(Console.status_list[1], Console.title_list[7], "GUI started")
 
         Console.cmd('wmctrl -r "./MapLauncher.sh" -b add,below')
 
@@ -251,9 +245,10 @@ class GUI :
                 quit()
 
                 Console.log(Console.color("Program stopped", Console.C.ERROR), start = "\n\n", sleep = 2)
-                Console.LOG.log(Console.status_list[1], Console.title_list[1], "GUI stopped", Info.log_path)
+                Console.LOG.log(Console.status_list[1], Console.title_list[7], "GUI stopped")
+                Console.LOG.log_end()
                 
-                return Success
+                return Info.exit_success
     
     Console.log(Console.animate() + " <=> " + Console.color("Init - welcome fonction", Console.C.WARNING, "CLASS - GUI"), delete = True)
     
@@ -318,7 +313,7 @@ class GUI :
         
         Console.animation_step = Console.animation_max_step
         Console.log(Console.animate() + " <=> " + Console.color("Window - ready", Console.C.VALID, "SCREEN - welcome"), delete = True)
-        Console.LOG.log(Console.status_list[1], Console.title_list[1], "welcome window opened", Info.log_path)
+        Console.LOG.log(Console.status_list[1], Console.title_list[7], "welcome window opened")
 
         Console.cmd('wmctrl -a "MAP | WELCOME"')
 
@@ -329,7 +324,7 @@ class GUI :
                 if event.type == pg.KEYDOWN :
                     do_exit = True
         
-        Console.LOG.log(Console.status_list[1], Console.title_list[1], "welcome window closed", Info.log_path)
+        Console.LOG.log(Console.status_list[1], Console.title_list[7], "welcome window closed")
         
         return "home"
     
@@ -417,7 +412,7 @@ class GUI :
         
         Console.animation_step = Console.animation_max_step
         Console.log(Console.animate() + " <=> " + Console.color("Window - ready", Console.C.VALID, "SCREEN - credit"), delete = True)
-        Console.LOG.log(Console.status_list[1], Console.title_list[1], "credit window opened", Info.log_path)
+        Console.LOG.log(Console.status_list[1], Console.title_list[7], "credit window opened")
 
         Console.cmd('wmctrl -a "MAP | CREDIT"')
 
@@ -428,7 +423,7 @@ class GUI :
                 if event.type == pg.KEYDOWN :
                     do_exit = True
         
-        Console.LOG.log(Console.status_list[1], Console.title_list[1], "credit window closed", Info.log_path)
+        Console.LOG.log(Console.status_list[1], Console.title_list[7], "credit window closed")
         
         return "home"
     
@@ -488,7 +483,7 @@ class GUI :
         
         Console.animation_step = Console.animation_max_step
         Console.log(Console.animate() + " <=> " + Console.color("Window - ready", Console.C.VALID, "SCREEN - home"), delete = True)
-        Console.LOG.log(Console.status_list[1], Console.title_list[1], "home window opened", Info.log_path)
+        Console.LOG.log(Console.status_list[1], Console.title_list[7], "home window opened")
 
         Console.cmd('wmctrl -a "MAP | HOME"')
 
@@ -548,7 +543,7 @@ class GUI :
                         if event.dict['key'] == pg.K_RETURN and is_enter_pressed :
                             is_enter_pressed = False
         
-        Console.LOG.log(Console.status_list[1], Console.title_list[1], "home window closed", Info.log_path)
+        Console.LOG.log(Console.status_list[1], Console.title_list[7], "home window closed")
         
         return buttons[selected_button]
     
@@ -556,12 +551,12 @@ class GUI :
     
     def view() -> str :
         
-        Console.LOG.log(Console.status_list[1], Console.title_list[1], "viewer window opened", Info.log_path)
+        Console.LOG.log(Console.status_list[1], Console.title_list[7], "viewer window opened")
         
         Viewer.open()
         Viewer.show((1000, 1000))
         
-        Console.LOG.log(Console.status_list[1], Console.title_list[1], "viewer window closed", Info.log_path)
+        Console.LOG.log(Console.status_list[1], Console.title_list[7], "viewer window closed")
         
         return "home"
     
@@ -615,7 +610,7 @@ class GUI :
         
         Console.animation_step = Console.animation_max_step
         Console.log(Console.animate() + " <=> " + Console.color("Window - ready", Console.C.VALID, "SCREEN - generator"), delete = True)
-        Console.LOG.log(Console.status_list[1], Console.title_list[1], "generator window opened", Info.log_path)
+        Console.LOG.log(Console.status_list[1], Console.title_list[7], "generator window opened")
         
         Console.cmd('wmctrl -a "MAP | GENERATOR"')
         
@@ -700,7 +695,9 @@ class GUI :
                         Console.log(Console.color("\n--------------------", Console.C.VALID))
                         Console.log(Console.color(f"\n    {new_map.file.name} in {new_map.file.path}\n\n    additional info :\n        - boolean = {new_map.is_bool}\n        - binary = {new_map.is_bin}\n        - string = {new_map.is_str}\n        - size = {map_size}", Console.C.VALID, "file saved"))
                         Console.log(Console.color("--------------------", Console.C.VALID))
-                        
+                        Console.LOG.log(Console.status_list[1], Console.title_list[4], "New map saved :")
+                        Console.LOG.save(f">>> --------------------\n>>> {new_map.file.name} in {new_map.file.path}\n>>>\n>>> additional info :\n>>>     - boolean = {new_map.is_bool}\n>>>     - binary = {new_map.is_bin}\n>>>     - string = {new_map.is_str}\n>>>     - size = {map_size}\n>>> --------------------")
+
                         choosen = False
                         pg.quit()
                         do_exit = True
@@ -781,7 +778,7 @@ class GUI :
                         if event.dict['key'] == pg.K_RETURN and is_enter_pressed :
                             is_enter_pressed = False
         
-        Console.LOG.log(Console.status_list[1], Console.title_list[1], "generator window closed", Info.log_path)
+        Console.LOG.log(Console.status_list[1], Console.title_list[7], "generator window closed")
         
         return "home"
     
@@ -790,7 +787,7 @@ class GUI :
     def select_val(current_limit : int | float, step : int | float, low : int | float, high : int | float, name : str) -> float :
         
         Console.log(Console.color(f"{name} selector opened", Console.C.INFO, "SCREEN - select_val"), start = "", end = "\n")
-        Console.LOG.log(Console.status_list[1], Console.title_list[1], f"{name} selector window opened", Info.log_path)
+        Console.LOG.log(Console.status_list[1], Console.title_list[7], f"{name} selector window opened")
         
         import pygame as pg
         from files import generator as gen
@@ -864,12 +861,33 @@ class GUI :
                 new_limit = high
                 
         Console.log(Console.color(f"{name} selector closed", Console.C.INFO, "SCREEN - select_val"))
-        Console.LOG.log(Console.status_list[1], Console.title_list[1], f"{name} selector window closed", Info.log_path)
+        Console.LOG.log(Console.status_list[1], Console.title_list[7], f"{name} selector window closed")
         
         return new_limit
     
     Console.animation_step = Console.animation_max_step
     Console.log(Console.animate() + " <=> " + Console.color("Init - Finish", Console.C.VALID, "CLASS - GUI"), delete = True)
-    Console.LOG.log(Console.status_list[1], Console.title_list[2], "GUI initialized", Info.log_path)
+    Console.LOG.log(Console.status_list[1], Console.title_list[2], "GUI initialized")
 
-GUI.start()
+if __name__ == "__main__":
+    try :
+        import tkinter as tk
+    except ImportError or ModuleNotFoundError :
+        print("\n\033[41m \033[0m\033[31m Error while loading pygame\033[0m\n")
+        exit(Info.exit_error)
+    else :
+        try :
+            GUI.start()
+        except KeyboardInterrupt :
+            print("\r\033[41m \033[0m\033[31m Keyboard interrupt ('Ctrl+C')\033[0m\n")
+            exit(Info.exit_error)
+        except tk.TclError as error :
+            print("\n\033[41m \033[0m\033[31m an unexpected error occurred on previous action (Tkinter)\033[0m\n")
+            print(''.join(tb.format_exception(None, error, error.__traceback__)))
+            exit(Info.exit_error)
+        except Exception as error :
+            print("\n\033[41m \033[0m\033[31m an unexpected error occurred on previous action\033[0m\n")
+            print(''.join(tb.format_exception(None, error, error.__traceback__)))
+            exit(Info.exit_error)
+        else :
+            exit(Info.exit_success)
